@@ -1,6 +1,5 @@
 #1. Read the CSV Data.
 import csv
-line_num = 0
 file_name = 'PyBank/Resources/budget_data.csv'
 with open(file_name, 'r') as file:
     raw_data = csv.reader(file)
