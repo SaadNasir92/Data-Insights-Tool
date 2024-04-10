@@ -41,5 +41,16 @@ net_total = sum(profit_and_losses)
 
 profit_loss_delta = [(profit_and_losses[index+1] - profit_and_losses[index]) for index in range(len(profit_and_losses)) if profit_and_losses[-1] != profit_and_losses[index]]
 
-average_p_and_l = round(sum(profit_loss_delta)/len(profit_loss_delta),2)
+average_p_and_l = round(sum(profit_loss_delta)/len(profit_loss_delta), 2)
+
+#5. The greatest increase in profits (date and amount) over the entire period
+#debugging line to compare len of delta vector vs the initial vector.
+# print(len(profit_loss_delta))
+max_delta = (max(profit_loss_delta))
+max_delta_mo = dates[profit_loss_delta.index(max_delta) + 1]
+
+
+#6. The greatest decrease in profits (date and amount) over the entire period
+min_delta = (min(profit_loss_delta))
+min_delta_mo = dates[profit_loss_delta.index(min_delta) + 1]
 
