@@ -20,18 +20,35 @@ counties = [row[1] for row in data if row[1]!= 'County']
 candidates = [row[2] for row in data if row[2]!= 'Candidate']
 
 #testing code 
-print(ballot_ids[0:5])
-print(counties[0:5])
-print(candidates[0:5])
+# print(ballot_ids[0:5])
+# print(counties[0:5])
+# print(candidates[0:5])
 
 # The total number of votes cast
+total_votes = len(ballot_ids)
 
 
 # A complete list of candidates who received votes
 
-# The percentage of votes each candidate won
+list_of_candidates = [name for name in set(candidates)]
 
-# The total number of votes each candidate won
+
+# The percentage of votes each candidate won & The total number of votes each candidate won
+# Set counters for each candidates votes
+ccs_total_votes = 0
+rad_total_votes = 0
+dd_total_votes = 0
+for row in data:
+        if row[2] == 'Charles Casper Stockham':
+                ccs_total_votes += 1
+        elif row[2] == 'Raymon Anthony Doane':
+                rad_total_votes += 1
+        else:
+                dd_total_votes += 1
+ccs_vote_perc = round((ccs_total_votes/total_votes)*100,3)
+rad_vote_perc = round((rad_total_votes/total_votes)*100,3)
+dd_vote_perc = round((dd_total_votes/total_votes)*100,3)
+
 
 # The winner of the election based on popular vote
 
