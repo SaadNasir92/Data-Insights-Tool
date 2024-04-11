@@ -11,17 +11,17 @@ def make_dashes():
 def poll_analysis(csv_data):
     # Read the CSV Data.
     with open(file_name, 'r') as file:
-            raw_data = csv.reader(file)
-            data = [line for line in raw_data]
-            data.pop(0)
+        raw_data = csv.reader(file)
+        data = [line for line in raw_data]
+        data.pop(0)
 
     # Make a dictionary that stores keys as candidate names and the total # of votes they earned.
     voter_data = {}
     for row in data:
         if row[2] not in voter_data:
-                voter_data[row[2]] = 1
+            voter_data[row[2]] = 1
         else:
-                voter_data[row[2]] = voter_data[row[2]] + 1
+            voter_data[row[2]] = voter_data[row[2]] + 1
                     
     # Begin Printing Analysis Data
     print("\nElection Results\n")
@@ -41,8 +41,8 @@ def poll_analysis(csv_data):
     for k, v in voter_data.items():
         perc_of_votes = round((v/total_votes)*100, 3)
         if perc_of_votes > winner_tracker:
-                winner = k
-                winner_tracker = perc_of_votes
+            winner = k
+            winner_tracker = perc_of_votes
         print(f'\n{k}: {perc_of_votes}% ({v})\n')
     make_dashes()
     print(f'\nWinner: {winner}\n')
