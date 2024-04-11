@@ -5,7 +5,7 @@ file_name = 'PyBank/Resources/budget_data.csv'
 
 # Create function to make dashes in the analysis
 def make_dashes():
-        print('---------------')
+    print('---------------')
         
 # Create function to make report and print to console.       
 def financial_analysis(csv_data):
