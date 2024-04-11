@@ -3,54 +3,46 @@
 
 # You will be given a set of poll data called election_data.csv. The dataset is composed of three columns: "Voter ID", "County", and "Candidate". Your task is to create a Python script that analyzes the votes and calculates each of the following values:
 
-#1. Use CSV module to load, read and clean data by making 3 vectors that contain each of the csv data.
+#1. Use CSV module to load, read and clean data.
 import csv
 
-
+        # Open file and remove header row.
 file_name = 'PyPoll/Resources/election_data.csv'
 
 with open(file_name, 'r') as file:
         raw_data = csv.reader(file)
         data = [line for line in raw_data]
+        data.pop(0)
 
-
-# filter data 
-ballot_ids = [row[0] for row in data if row[0]!= 'Ballot ID']
-counties = [row[1] for row in data if row[1]!= 'County']
-candidates = [row[2] for row in data if row[2]!= 'Candidate']
-
-#testing code 
-# print(ballot_ids[0:5])
-# print(counties[0:5])
-# print(candidates[0:5])
+        # Make a dictionary that stores keys as candidate names and the total # of votes they earned.
+voter_data = {}
+for row in data:
+        if row[2] not in voter_data:
+                voter_data[row[2]] = 1
+        else:
+                voter_data[row[2]] = voter_data[row[2]] + 1
 
 # The total number of votes cast
-total_votes = len(ballot_ids)
-
+total_votes = sum(voter_data.values())
 
 # A complete list of candidates who received votes
-
-list_of_candidates = [name for name in set(candidates)]
+list_candidates = list(voter_data.keys())
 
 
 # The percentage of votes each candidate won & The total number of votes each candidate won
-# Set counters for each candidates votes
-ccs_total_votes = 0
-rad_total_votes = 0
-dd_total_votes = 0
-for row in data:
-        if row[2] == 'Charles Casper Stockham':
-                ccs_total_votes += 1
-        elif row[2] == 'Raymon Anthony Doane':
-                rad_total_votes += 1
-        else:
-                dd_total_votes += 1
-ccs_vote_perc = round((ccs_total_votes/total_votes)*100,3)
-rad_vote_perc = round((rad_total_votes/total_votes)*100,3)
-dd_vote_perc = round((dd_total_votes/total_votes)*100,3)
+winner_tracker = 0
+winner = ''
+for k, v in voter_data.items():
+        perc_of_votes = round((v/total_votes)*100, 3)
+        if perc_of_votes > winner_tracker:
+                winner = k
+                winner_tracker = perc_of_votes
+        print(f'{k}: {perc_of_votes}% ({v})')
+        print(winner)
 
 
 # The winner of the election based on popular vote
+
 
 # Your analysis should align with the following results:
 
