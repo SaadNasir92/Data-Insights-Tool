@@ -1,7 +1,8 @@
 import csv
+import os
 
 # File path declaration
-file_name = 'PyBank/Resources/budget_data.csv'
+file_name = os.path.join('PyBank', 'Resources', 'budget_data.csv')
 
 # Create function to make dashes in the analysis
 def make_dashes():
@@ -12,11 +13,12 @@ def financial_analysis(csv_data):
     # Read the CSV Data.
     with open(csv_data, 'r') as file:
         raw_data = csv.reader(file)
+        column_headers = next(raw_data)
         data = [line for line in raw_data]
 
     # Separate the dates and the p/l in to their own respectives lists.
-    dates = [row[0] for row in data if row[0]!= 'Date']
-    profit_and_losses = [int(row[1]) for row in data if row[1]!= 'Profit/Losses']
+    dates = [row[0] for row in data]
+    profit_and_losses = [int(row[1]) for row in data]
 
     # Start building the return of the function which we will use to write and create the analysis as a .txt file and print to console.
     lines_to_write = ['Financial Analysis\n']

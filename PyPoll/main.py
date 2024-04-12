@@ -1,7 +1,8 @@
 import csv
+import os
 
 # File path declaration
-file_name = 'PyPoll/Resources/election_data.csv'
+file_name = os.path.join('PyPoll', 'Resources', 'election_data.csv')
 
 # Create function to make dashes in the analysis
 def make_dashes():
@@ -12,9 +13,9 @@ def poll_analysis(csv_data):
     # Read the CSV Data.
     with open(file_name, 'r') as file:
         raw_data = csv.reader(file)
+        column_headers = next(raw_data)
         data = [line for line in raw_data]
-        data.pop(0)
-
+        
     # Make a dictionary that stores keys as candidate names and the total # of votes they earned.
     voter_data = {}
     for row in data:
