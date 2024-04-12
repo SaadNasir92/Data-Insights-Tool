@@ -6,10 +6,22 @@ file_name = os.path.join('PyBank', 'Resources', 'budget_data.csv')
 
 # Create function to make dashes in the analysis
 def make_dashes():
+    """
+    returns string of dashes for formatting. 
+    """
     return '---------------'
         
 # Create function to make report and print to console.       
 def financial_analysis(csv_data):
+    """
+    Clean, manipulate and calculate based on the CSV data and returns a list of analysis lines to be further worked on.
+
+    Args:
+        csv_data files
+
+    Returns:
+        list of strings to work on further.
+    """
     # Read the CSV Data.
     with open(csv_data, 'r') as file:
         raw_data = csv.reader(file)
