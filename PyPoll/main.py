@@ -5,7 +5,7 @@ file_name = 'PyPoll/Resources/election_data.csv'
 
 # Create function to make dashes in the analysis
 def make_dashes():
-    print('---------------')
+    return '---------------'
 
 # Create function to make report and print to console.
 def poll_analysis(csv_data):
@@ -23,16 +23,17 @@ def poll_analysis(csv_data):
         else:
             voter_data[row[2]] = voter_data[row[2]] + 1
                     
-    # Begin Printing Analysis Data
-    print("\nElection Results\n")
-    make_dashes()
-    
+    # Start building the return of the function which we will use to write and create the analysis as a .txt file and print to console.
+    lines_to_write = ['Election Results\n']
+    create_dashes = make_dashes()
+    lines_to_write.append(create_dashes)
+
     # The total number of votes cast
     total_votes = sum(voter_data.values())
-    print(f'\nTotal Votes: {total_votes}\n')
-    make_dashes()
+    lines_to_write.append(f'\nTotal Votes: {total_votes}\n')
+    lines_to_write.append(create_dashes)
 
-    # A complete list of candidates who received votes
+    # A complete list of candidates who received votes. Not printing anywhere, only included per request.
     list_candidates = list(voter_data.keys())
 
     # The percentage of votes each candidate won & The total number of votes each candidate won
@@ -43,9 +44,19 @@ def poll_analysis(csv_data):
         if perc_of_votes > winner_tracker:
             winner = k
             winner_tracker = perc_of_votes
-        print(f'\n{k}: {perc_of_votes}% ({v})\n')
-    make_dashes()
-    print(f'\nWinner: {winner}\n')
-    make_dashes()
+        lines_to_write.append(f'\n{k}: {perc_of_votes}% ({v})\n')
+    lines_to_write.append(create_dashes)
+    lines_to_write.append(f'\nWinner: {winner}\n')
+    lines_to_write.append(create_dashes)
+     
+    # return the lines to write list so that we can use it to make the .txt file.
+    return lines_to_write
+
+# write to the file & console
+final_line_list = poll_analysis(file_name)
+output_filename_path = 'PyPoll/analysis/polls_analysis.txt'
+with open(output_filename_path, 'w') as file:
+    for line in final_line_list:
+        file.write(line + '\n')
+        print(line)
         
-poll_analysis(file_name)
