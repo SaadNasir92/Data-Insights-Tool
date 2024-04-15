@@ -1,8 +1,9 @@
 import csv
 import os
 
-# File path declaration
-file_name = os.path.join('PyPoll', 'Resources', 'election_data.csv')
+# File path declaration and setting the script directory. 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(script_dir, 'Resources', 'election_data.csv')
 
 # Create function to make dashes in the analysis
 def make_dashes():
@@ -12,7 +13,7 @@ def make_dashes():
     return '---------------'
 
 # Create function to make report and print to console.
-def poll_analysis(csv_data):
+def poll_analysis(path_to_csv):
     """
     Clean, manipulate and calculate based on the CSV data and returns a list of analysis lines to be further worked on.
 
@@ -23,7 +24,7 @@ def poll_analysis(csv_data):
         list of strings to work on further.
     """
     # Read the CSV Data.
-    with open(file_name, 'r') as file:
+    with open(path_to_csv, 'r') as file:
         raw_data = csv.reader(file)
         column_headers = next(raw_data)
         data = [line for line in raw_data]
@@ -66,8 +67,8 @@ def poll_analysis(csv_data):
     return lines_to_write
 
 # write to the file & console
-final_line_list = poll_analysis(file_name)
-output_filename_path = 'PyPoll/analysis/polls_analysis.txt'
+final_line_list = poll_analysis(file_path)
+output_filename_path = os.path.join(script_dir, 'analysis', 'poll_analysis.txt')
 with open(output_filename_path, 'w') as file:
     for line in final_line_list:
         file.write(line + '\n')
